@@ -7,17 +7,16 @@
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
-
   </head>
   <body>
     <div id="root"></div>
     <script type="text/babel">
 
-      function changeColor(n) {
+      const changeColor = (n) => {
         if (n % 2 === 0) {
-          return "red"
+          return "red";
         } else {
-          return "blue"
+          return "blue";
         }
       };
 
@@ -25,43 +24,42 @@
         constructor(props) {
           super(props);
           this.state = {
-            counter: 0,
-            };
+            counter: 0
+          };
           this.countUp = this.countUp.bind(this);
           this.countDown = this.countDown.bind(this);
           this.reset = this.reset.bind(this);
-        };
+        }
 
         countUp() {
           this.setState(prevState => {
-            return {counter: prevState.counter + 1}
-          })
-        };
+            return {counter: prevState.counter + 1};
+          });
+        }
 
         countDown() {
           this.setState(prevState => {
-            return {counter: prevState.counter - 1}
-          })
-        };
+            return {counter: prevState.counter - 1};
+          });
+        }
 
         reset() {
           this.setState(() => {
-            return {counter: 0}
-          })
-        };
-        
+            return {counter: 0};
+          });
+        }
 
         render() {
           return (
             <div>
-              <div style={{color: changeColor(this.state.counter)}}>{this.state.counter}</div>
+              <div className={changeColor(this.state.counter)}>{this.state.counter}</div>
               <button onClick={this.countUp}>+</button>
               <button onClick={this.countDown}>-</button>
               <button onClick={this.reset}>Reset</button>
             </div>
           );
         }
-      };
+      }
 
       ReactDOM.render(
         <Counter/>,
@@ -70,4 +68,4 @@
 
     </script>
   </body>
-  </html>
+</html>

@@ -12,20 +12,65 @@
   <body>
     <div id="root"></div>
     <script type="text/babel">
-      function tick() {
-        const element = (
-          <div>
-            <h1>Hello, world!</h1>
-            <h2>It is {new Date().toLocaleTimeString()}.</h2>
-          </div>
-        );
-        ReactDOM.render(
-          element,
-          document.getElementById('root')
-        );
-      }
 
-      setInterval(tick, 1000);
+      // function Counter(props) {
+      //   return <div>0</div>
+      // }
+          function colorChange(n) {
+            if (n % 2 === 0) {
+              return "red"
+            } else {
+              return "blue"
+            }
+          }
+
+        class Counter extends React.Component {
+          constructor(props) {
+            super(props);
+            this.state = {
+              counter: 0,
+              };
+            this.countUp = this.countUp.bind(this);
+            this.countDown = this.countDown.bind(this);
+            this.reset = this.reset.bind(this);
+          };
+
+          countUp() {
+            this.setState(prevState => {
+              return {counter: prevState.counter + 1}
+            })
+          };
+
+          countDown() {
+            this.setState(prevState => {
+              return {counter: prevState.counter - 1}
+            })
+          };
+
+          reset() {
+            this.setState(() => {
+              return {counter: 0}
+            })
+          };
+          
+
+          render() {
+            return (
+              <div>
+                <div style={{color: colorChange(this.state.counter)}}>{this.state.counter}</div>
+                <button onClick={this.countUp}>+</button>
+                <button onClick={this.countDown}>-</button>
+                <button onClick={this.reset}>Reset</button>
+              </div>
+            );
+          }
+        }
+
+      ReactDOM.render(
+        <Counter/>,
+        document.getElementById('root')
+      );
+
     </script>
   </body>
   </html>

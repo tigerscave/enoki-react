@@ -7,25 +7,65 @@
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
-
   </head>
   <body>
     <div id="root"></div>
     <script type="text/babel">
-      function tick() {
-        const element = (
-          <div>
-            <h1>Hello, world!</h1>
-            <h2>It is {new Date().toLocaleTimeString()}.</h2>
-          </div>
-        );
-        ReactDOM.render(
-          element,
-          document.getElementById('root')
-        );
+
+      const changeColor = (n) => {
+        if (n % 2 === 0) {
+          return "red";
+        } else {
+          return "blue";
+        }
+      };
+
+      class Counter extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            counter: 0
+          };
+          this.countUp = this.countUp.bind(this);
+          this.countDown = this.countDown.bind(this);
+          this.reset = this.reset.bind(this);
+        }
+
+        countUp() {
+          this.setState(prevState => {
+            return {counter: prevState.counter + 1};
+          });
+        }
+
+        countDown() {
+          this.setState(prevState => {
+            return {counter: prevState.counter - 1};
+          });
+        }
+
+        reset() {
+          this.setState(() => {
+            return {counter: 0};
+          });
+        }
+
+        render() {
+          return (
+            <div>
+              <div className={changeColor(this.state.counter)}>{this.state.counter}</div>
+              <button onClick={this.countUp}>+</button>
+              <button onClick={this.countDown}>-</button>
+              <button onClick={this.reset}>Reset</button>
+            </div>
+          );
+        }
       }
 
-      setInterval(tick, 1000);
+      ReactDOM.render(
+        <Counter/>,
+        document.getElementById('root')
+      );
+
     </script>
   </body>
-  </html>
+</html>
